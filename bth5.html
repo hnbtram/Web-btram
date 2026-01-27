@@ -1,0 +1,94 @@
+<html>
+    <!DOCTYPE html>
+    <html lang="vi">
+        <head>
+            <meta charset="UTF-8">
+            <title>Yêu cầu đặc biệt</title>
+            
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background: #f5f6f7;
+                    padding: 30px;
+                }
+                
+                .container {
+                    background: #ffffff;
+                    padding: 20px;
+                    width: 500px;
+                    border-radius: 8px;
+                }
+                
+                h3 {
+                    margin-bottom: 15px;
+                }
+                
+                .row {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 15px;
+                }
+                
+                .section {
+                    background: #ffffff;
+                    padding: 15px;
+                    border-radius: 8px;
+                    margin-bottom: 15px;
+                }
+                
+                textarea {
+                    width: 100%;
+                    height: 80px;
+                    padding: 10px;
+                    border-radius: 6px;
+                    border: 1px solid #ccc;
+                    resize: none;
+                }
+                
+                .btn {
+                    text-align: right;
+                }
+                
+                button {
+                    background: #b90642ea;
+                    color: white;
+                    border: none;
+                    padding: 12px 30px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    border-radius: 6px;
+                    cursor: pointer;
+                }
+            </style>
+        </head>
+        <body>
+            <section>
+                <div class="container">
+                    <h3>Yêu cầu đặc biệt</h3>
+                    <p> <strong>Chọn loại giường </strong></p>
+                    <div class="row">
+                        <label>
+                            <input type="radio" name="bed" checked> 1 giường King
+                        </label>
+                        <label> 
+                            <input type="radio" name="bed" cheched> 2 giường đơn
+                        </label>
+                    </div>
+                    <div class="section">
+                        <p> <strong>Yêu cầu đặc biệt</strong></p>
+                        <label>
+                            <input type="checkbox"> Phòng không hút thuốc 
+                        </label> <br><br>
+                        <label>
+                            <input type="checkbox"> Phòng ở tầng cao
+                        </label>
+                        <p style="margin-top:15px;"><strong>Yêu cầu riêng của bạn</strong></p>
+                        <textarea placeholder="Nhập yêu cầu "></textarea>
+                    </div> 
+                    <div class="btn">
+                        <button> Thanh toán</button>
+                    </div>    
+                </div>
+            </section>
+        </body>    
+</html>

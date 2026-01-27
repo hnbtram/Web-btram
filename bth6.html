@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu đăng ký</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .container{
+            width: 600px;
+            margin: 20px auto;
+        }
+        h2{
+            text-align: center;
+            color: green;
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #e6ffe6;
+        }
+        td{
+            border: 1px solid #66cc66;
+            padding: 6px;
+        }
+        td:first-child{
+            width:35%;
+        }
+        input[type="text"],
+        select{
+            width: 95%;
+            padding: 4px;
+        }
+        select[multiple]{
+            height: 80px;
+        }
+        .center{
+            text-align: center;
+        }
+        .success{
+            color: red;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Phiếu đăng ký tham gia chương trình khuyến mãi</h2>
+
+        <form>
+            <table>
+                <tr>
+                    <td>Họ và tên</td>
+                    <td>
+                        <input type="text" value="Hoàng Nhật Bảo Trâm">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Địa chỉ</td>
+                    <td>
+                        <input type="text" value="S106 - Vinhomes Smart City">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Điện thoại</td>
+                    <td>
+                        <input type="text" value="0909123456">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Phái</td>
+                    <td>
+                        <input type="radio" name="gender">Nam
+                        <input type="radio" name="gender" checked>Nữ
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Nghề nghiệp</td>
+                    <td>
+                        <select>
+                            <option>Giáo viên</option>
+                            <option>Kỹ sư</option>
+                            <option selected>Nhân viên văn phòng</option>
+                            <option>/Sinh viên</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Chọn sản phẩm tham gia</td>
+                    <td>
+                        <select multiple>
+                            <option selected>Kem đánh răng</option>
+                            <option>Bột giặt</option>
+                            <option>Dầu gội đầu</option>
+                            <option>Sữa tắm</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Số người dự đoán tham gia</td>
+                    <td>
+                        <input type="text" value="250000">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="center">
+                        <input type="submit" value="Đồng ý">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="success">
+                        Bạn đã đăng ký thành công!!!
+                    </td>
+                </tr>
+                </table>
+        </form>
+    </div>
+    
+</body>
+</html>
