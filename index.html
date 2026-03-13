@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeService - Đặt dịch vụ dọn dẹp & sửa chữa trực tuyến</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo" onclick="showSection('home')">Home<span>Service</span></div>
+            <div class="nav-links">
+                <a href="#" onclick="showSection('home')">Trang chủ</a>
+                <a href="#" onclick="showSection('services')">Dịch vụ</a>
+                <a href="#" onclick="showSection('staff')">Nhân viên</a>
+                <a href="#" onclick="showSection('pricing')">Bảng giá</a>
+                <a href="#" onclick="showSection('contact')">Liên hệ</a>
+                <div id="login-section">
+                    <a href="#" class="btn-login" onclick="showLoginModal()">Đăng nhập</a>
+                </div>
+                <div id="user-section" style="display: none;">
+                    <div class="user-dropdown">
+                        <span class="user-name" id="displayName">
+                            <i>👤</i> Nguyễn Văn A
+                        </span>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="showProfile()">
+                                <i>👤</i> Trang cá nhân
+                            </a>
+                            <a href="#" onclick="showMyBookings()">
+                                <i>📋</i> Đơn đặt dịch vụ
+                            </a>
+                            <a href="#" onclick="showMyPayments()">
+                                <i>💳</i> Lịch sử thanh toán
+                            </a>
+                            <a href="#" onclick="showSavedServices()">
+                                <i>💾</i> Đơn dịch vụ đã lưu
+                            </a>
+                            <a href="#" onclick="logout()">
+                                <i>🚪</i> Đăng xuất
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <!-- Home Section -->
+        <div id="home-section" class="section">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>Dịch vụ dọn dẹp & sửa chữa tại nhà</h1>
+                    <p>Đặt lịch ngay hôm nay - Nhân viên chuyên nghiệp, giá cả hợp lý</p>
+                    <div class="search-box">
+                        <input type="text" placeholder="Tìm kiếm dịch vụ..." id="search-input">
+                        <button onclick="searchServices()">Tìm kiếm</button>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Dịch vụ nổi bật</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🧹</div>
+                    <h3>Dọn dẹp nhà cửa</h3>
+                    <p>Dịch vụ dọn dẹp chuyên nghiệp, sạch sẽ, nhanh chóng</p>
+                    <div class="service-price">250.000đ <small>/giờ</small></div>
+                    <button class="btn-book" onclick="showBookingModal('Dọn dẹp nhà cửa', 250000)">Đặt ngay</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛋️</div>
+                    <h3>Giặt sofa / thảm</h3>
+                    <p>Làm sạch sofa, thảm với công nghệ hiện đại</p>
+                    <div class="service-price">350.000đ <small>/bộ</small></div>
+                    <button class="btn-book" onclick="showBookingModal('Giặt sofa / thảm', 350000)">Đặt ngay</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Sửa điện</h3>
+                    <p>Sửa chữa hệ thống điện, thiết bị điện an toàn</p>
+                    <div class="service-price">200.000đ <small>/lần</small></div>
+                    <button class="btn-book" onclick="showBookingModal('Sửa điện', 200000)">Đặt ngay</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💧</div>
+                    <h3>Sửa ống nước</h3>
+                    <p>Khắc phục sự cố đường ống nước nhanh chóng</p>
+                    <div class="service-price">200.000đ <small>/lần</small></div>
+                    <button class="btn-book" onclick="showBookingModal('Sửa ống nước', 200000)">Đặt ngay</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">❄️</div>
+                    <h3>Sửa máy lạnh</h3>
+                    <p>Sửa chữa, bảo dưỡng máy lạnh chuyên nghiệp</p>
+                    <div class="service-price">300.000đ <small>/lần</small></div>
+                    <button class="btn-book" onclick="showBookingModal('Sửa máy lạnh', 300000)">Đặt ngay</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Sửa thiết bị gia dụng</h3>
+                    <p>Sửa chữa các thiết bị gia dụng tại nhà</p>
+                    <div class="service-price">250.000đ <small>/lần</small></div>
+                    <button class="btn-book" onclick="showBookingModal('Sửa thiết bị gia dụng', 250000)">Đặt
+                        ngay</button>
+                </div>
+            </div>
+
+            <h2 class="section-title">Nhân viên tiêu biểu</h2>
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <div class="staff-image">👨‍🔧</div>
+                    <div class="staff-info">
+                        <h4>Nguyễn Văn An</h4>
+                        <p>Chuyên: Điện nước</p>
+                        <div class="staff-rating">★★★★★ (4.9)</div>
+                        <p>50+ đơn hoàn thành</p>
+                    </div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-image">👩‍🔧</div>
+                    <div class="staff-info">
+                        <h4>Trần Thị Bình</h4>
+                        <p>Chuyên: Dọn dẹp</p>
+                        <div class="staff-rating">★★★★★ (5.0)</div>
+                        <p>100+ đơn hoàn thành</p>
+                    </div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-image">👨‍🔧</div>
+                    <div class="staff-info">
+                        <h4>Lê Văn Cường</h4>
+                        <p>Chuyên: Máy lạnh</p>
+                        <div class="staff-rating">★★★★☆ (4.8)</div>
+                        <p>80+ đơn hoàn thành</p>
+                    </div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-image">👩‍🔧</div>
+                    <div class="staff-info">
+                        <h4>Phạm Thị Dung</h4>
+                        <p>Chuyên: Giặt thảm</p>
+                        <div class="staff-rating">★★★★★ (4.9)</div>
+                        <p>60+ đơn hoàn thành</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <div id="services-section" class="section" style="display: none;">
+            <h2 class="section-title">Tất cả dịch vụ</h2>
+
+            <!-- Thanh tìm kiếm và lọc - GIỐNG NHÂN VIÊN -->
+    <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center; align-items: center;">
+        <div style="display: flex; align-items: center; background: white; border-radius: 50px; padding: 0.3rem 0.3rem 0.3rem 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); flex: 1; max-width: 400px;">
+            <i style="color: #999; margin-right: 0.5rem;">🔍</i>
+            <input type="text" id="search-service" placeholder="Tìm kiếm dịch vụ..." 
+                style="border: none; padding: 0.8rem 0; width: 100%; outline: none; font-size: 1rem;">
+            <button onclick="loadServices()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 600;">
+                Tìm
+            </button>
+        </div>
+        
+        <select id="filter-category" onchange="loadServices()"
+            style="padding: 0.8rem 1.5rem; border: 2px solid #e0e0e0; border-radius: 50px; font-size: 1rem; background: white; min-width: 200px;">
+            <option value="">Tất cả danh mục</option>
+            <option value="cleaning">Dọn dẹp</option>
+            <option value="repair">Sửa chữa</option>
+            <option value="appliance">Điện máy</option>
+            <option value="plumbing">Sửa ống nước</option>
+        </select>
+    </div>
+
+            <!-- Danh sách dịch vụ dạng dọc - THAY ĐỔI Ở ĐÂY -->
+    <div id="services-list" style="max-width: 1000px; margin: 0 auto;">
+        <!-- Services will be loaded here -->
+    </div>
+
+            <!-- Thông báo khi không có dịch vụ -->
+            <div id="no-services" style="text-align: center; padding: 3rem; display: none;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">😕</div>
+                <h3 style="color: #333;">Không tìm thấy dịch vụ</h3>
+                <p style="color: #666;">Vui lòng thử lại với từ khóa khác</p>
+            </div>
+        </div>
+
+        <!-- Service Detail Modal -->
+<div id="service-detail-modal" class="modal">
+    <div class="modal-content" style="max-width: 650px;">
+        <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <h2 style="color: white; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 28px;">📋</span> Chi tiết dịch vụ
+            </h2>
+            <span class="close-modal" onclick="closeServiceDetailModal()" style="color: white; font-size: 32px; cursor: pointer;">&times;</span>
+        </div>
+        
+        <div id="service-detail-content" style="padding: 2rem; max-height: 70vh; overflow-y: auto;">
+            <!-- Nội dung chi tiết sẽ được load bằng JavaScript -->
+        </div>
+        
+        <div style="display: flex; gap: 1rem; padding: 1.5rem 2rem 2rem; border-top: 1px solid #e0e0e0;">
+            <button class="btn-book" onclick="bookFromDetail()" style="flex: 2;" id="detail-book-btn">
+                <i>📝</i> Đặt dịch vụ ngay
+            </button>
+            <button class="btn-book" onclick="closeServiceDetailModal()" style="flex: 1; background: #6c757d;">
+                Đóng
+            </button>
+        </div>
+    </div>
+</div>
+
+        <!-- Staff Section -->
+<div id="staff-section" class="section" style="display: none;">
+    <h2 class="section-title">Đội ngũ nhân viên của chúng tôi</h2>
+    
+    <!-- Thanh tìm kiếm và lọc -->
+    <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center; align-items: center;">
+        <div style="display: flex; align-items: center; background: white; border-radius: 50px; padding: 0.3rem 0.3rem 0.3rem 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); flex: 1; max-width: 400px;">
+            <i style="color: #999; margin-right: 0.5rem;">🔍</i>
+            <input type="text" id="public-staff-search" placeholder="Tìm kiếm nhân viên..." 
+                style="border: none; padding: 0.8rem 0; width: 100%; outline: none; font-size: 1rem;">
+            <button onclick="searchPublicStaff()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 600;">
+                Tìm
+            </button>
+        </div>
+        
+        <select id="public-staff-specialty" onchange="filterPublicStaff()"
+            style="padding: 0.8rem 1.5rem; border: 2px solid #e0e0e0; border-radius: 50px; font-size: 1rem; background: white; min-width: 200px;">
+            <option value="">Tất cả chuyên môn</option>
+            <option value="cleaning">Dọn dẹp</option>
+            <option value="repair">Sửa chữa</option>
+            <option value="appliance">Điện máy</option>
+            <option value="plumbing">Sửa ống nước</option>
+            <option value="all">Đa năng</option>
+        </select>
+    </div>
+
+    <!-- Danh sách nhân viên dạng dọc -->
+    <div id="public-staff-list" style="max-width: 900px; margin: 0 auto;">
+        <!-- Staff will be loaded dynamically here -->
+    </div>
+
+    <!-- Thông báo khi không có nhân viên -->
+    <div id="no-public-staff" style="text-align: center; padding: 3rem; display: none;">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">👥</div>
+        <h3 style="color: #333;">Không tìm thấy nhân viên</h3>
+        <p style="color: #666;">Vui lòng thử lại với từ khóa khác</p>
+    </div>
+</div>
+
+        <!-- Pricing Section -->
+        <div id="pricing-section" class="section" style="display: none;">
+            <h2 class="section-title">Bảng giá dịch vụ</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Dọn dẹp nhà cửa</h3>
+                    <div class="service-price">250.000đ <small>/giờ</small></div>
+                    <p>Giá cơ bản cho dịch vụ dọn dẹp</p>
+                </div>
+                <div class="service-card">
+                    <h3>Giặt sofa / thảm</h3>
+                    <div class="service-price">350.000đ - 500.000đ <small>/bộ</small></div>
+                    <p>Tùy theo kích thước</p>
+                </div>
+                <div class="service-card">
+                    <h3>Sửa điện</h3>
+                    <div class="service-price">200.000đ <small>/lần</small></div>
+                    <p>Chưa bao gồm vật tư thay thế</p>
+                </div>
+                <div class="service-card">
+                    <h3>Sửa ống nước</h3>
+                    <div class="service-price">200.000đ <small>/lần</small></div>
+                    <p>Chưa bao gồm vật tư thay thế</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div id="contact-section" class="section" style="display: none;">
+            <h2 class="section-title">Liên hệ với chúng tôi</h2>
+            <div
+                style="max-width: 600px; margin: 0 auto; background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="color: #333; margin-bottom: 0.5rem;">📞 Hotline</h3>
+                    <p style="color: #667eea; font-size: 1.5rem; font-weight: bold;">1900 1234</p>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="color: #333; margin-bottom: 0.5rem;">📧 Email</h3>
+                    <p style="color: #666;">support@homeservice.com</p>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="color: #333; margin-bottom: 0.5rem;">🏢 Địa chỉ</h3>
+                    <p style="color: #666;">50 Lạc long Quân, Tây Hồ, Hà Nội</p>
+                </div>
+                <div>
+                    <h3 style="color: #333; margin-bottom: 0.5rem;">⏰ Giờ làm việc</h3>
+                    <p style="color: #666;">Thứ 2 - Chủ nhật: 7:00 - 22:00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div id="profile-section" class="section" style="display: none;">
+            <div class="profile-container">
+                <!-- Profile Header -->
+                <div class="profile-header">
+                    <div class="profile-cover">
+                        <div class="profile-avatar-wrapper">
+                            <div class="profile-avatar" id="profile-avatar">
+                                👤
+                            </div>
+                            <label class="avatar-upload">
+                                <input type="file" accept="image/*" onchange="uploadAvatar(this)">
+                                <span>📷</span>
+                            </label>
+                        </div>
+
+                        <div class="profile-title">
+                            <h1 id="profile-name">Nguyễn Văn A</h1>
+                            <p>
+                                <span class="profile-badge">
+                                    <i>⭐</i> Thành viên từ 2025
+                                </span>
+                                <span class="profile-badge">
+                                    <i>📍</i> TP. Hà Nội
+                                </span>
+                            </p>
+
+                            <div class="profile-stats">
+                                <div class="stat-item">
+                                    <span class="stat-value" id="total-bookings">12</span>
+                                    <span class="stat-label">Đơn đặt</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="completed-bookings">8</span>
+                                    <span class="stat-label">Hoàn thành</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="avg-rating">4.9</span>
+                                    <span class="stat-label">Đánh giá</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Content -->
+                <div class="profile-content">
+                    <!-- Sidebar -->
+                    <div class="profile-sidebar">
+                        <ul class="profile-menu">
+                            <li><a href="#" class="active" onclick="showProfileSection('info')">
+                                    <i>👤</i> <span>Thông tin cá nhân</span>
+                                </a></li>
+                            <li><a href="#" onclick="showProfileSection('bookings')">
+                                    <i>📋</i> <span>Đơn đặt dịch vụ</span>
+                                </a></li>
+                            <li><a href="#" onclick="showProfileSection('reviews')">
+                                    <i>⭐</i> <span>Đánh giá của tôi</span>
+                                </a></li>
+                            <li><a href="#" onclick="showProfileSection('payments')">
+                                    <i>💳</i> <span>Thanh toán</span>
+                                </a></li>
+                            <li><a href="#" onclick="showProfileSection('saved')">
+                                    <i>💾</i> <span>Đơn dịch vụ đã lưu</span>
+                                </a></li>
+                            <li><a href="#" onclick="showProfileSection('settings')">
+                                    <i>⚙️</i> <span>Cài đặt</span>
+                                </a></li>
+                        </ul>
+
+                        <div class="profile-card">
+                            <div class="profile-card-title">
+                                <i>📞</i> Hỗ trợ khẩn cấp
+                            </div>
+                            <div class="profile-card-item">
+                                <i>📱</i> 1900 1234
+                            </div>
+                            <div class="profile-card-item">
+                                <i>✉️</i> support@homeservice.com
+                            </div>
+                            <div class="profile-card-item">
+                                <i>⏰</i> 24/7
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="profile-main">
+                        <!-- Thông tin cá nhân -->
+                        <div id="profile-info" class="profile-section active">
+                            <div class="section-header">
+                                <h3><i>👤</i> Thông tin cá nhân</h3>
+                                <button class="edit-btn" onclick="editProfile()">✏️ Chỉnh sửa</button>
+                            </div>
+
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">Họ và tên</span>
+                                    <span class="info-value" id="info-fullname">Bùi Nhật Bảo Trâm</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Email</span>
+                                    <span class="info-value" id="info-email">btram@email.com</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Số điện thoại</span>
+                                    <span class="info-value" id="info-phone">0914324828</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Ngày sinh</span>
+                                    <span class="info-value" id="info-dob">27/12/2005</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Địa chỉ</span>
+                                    <span class="info-value" id="info-address">S106 Vinhomes Smart City, Nam Từ Liêm</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Giới tính</span>
+                                    <span class="info-value" id="info-gender">Nam</span>
+                                </div>
+                            </div>
+
+                            <h3 style="margin: 2rem 0 1rem;"><i>📊</i> Hoạt động gần đây</h3>
+                            <div class="timeline" id="activity-timeline">
+                                <!-- Timeline will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Đơn đặt dịch vụ -->
+                        <div id="profile-bookings" class="profile-section">
+                            <div class="section-header">
+                                <h3><i>📋</i> Đơn đặt dịch vụ</h3>
+                            </div>
+                            <div class="filter-tabs">
+                                <button class="filter-tab active" onclick="filterProfileBookings('all')">Tất cả</button>
+                                <button class="filter-tab" onclick="filterProfileBookings('pending')">Chờ xác
+                                    nhận</button>
+                                <button class="filter-tab" onclick="filterProfileBookings('confirmed')">Đã xác
+                                    nhận</button>
+                                <button class="filter-tab" onclick="filterProfileBookings('completed')">Hoàn
+                                    thành</button>
+                            </div>
+                            <div id="profile-bookings-list" class="booking-list">
+                                <!-- Bookings will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Đánh giá của tôi -->
+                        <div id="profile-reviews" class="profile-section">
+                            <div class="section-header">
+                                <h3><i>⭐</i> Đánh giá của tôi</h3>
+                            </div>
+                            <div id="reviews-list" class="booking-list">
+                                <!-- Reviews will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Thanh toán -->
+                        <div id="profile-payments" class="profile-section">
+                            <div class="section-header">
+                                <h3><i>💳</i> Lịch sử thanh toán</h3>
+                            </div>
+                            <div class="filter-tabs">
+                                <button class="filter-tab active" onclick="filterProfilePayments('all')">Tất cả</button>
+                                <button class="filter-tab" onclick="filterProfilePayments('paid')">Đã thanh
+                                    toán</button>
+                                <button class="filter-tab" onclick="filterProfilePayments('unpaid')">Chưa thanh
+                                    toán</button>
+                            </div>
+                            <div id="profile-payments-list" class="booking-list">
+                                <!-- Payments will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Đơn dịch vụ đã lưu -->
+                        <div id="profile-saved" class="profile-section">
+                            <div class="section-header">
+                                <h3><i>💾</i> Đơn dịch vụ đã lưu</h3>
+                                <button class="edit-btn" onclick="showSaveBookingModal()">➕ Lưu đơn mới</button>
+                            </div>
+                            <div id="saved-bookings-list" class="booking-list">
+                                <!-- Saved bookings will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Cài đặt -->
+                        <div id="profile-settings" class="profile-section">
+                            <div class="section-header">
+                                <h3><i>⚙️</i> Cài đặt tài khoản</h3>
+                            </div>
+
+                            <form class="settings-form" onsubmit="saveSettings(event)">
+                                <h4>Thay đổi mật khẩu</h4>
+                                <div class="form-group">
+                                    <label>Mật khẩu hiện tại</label>
+                                    <input type="password" id="current-password" placeholder="Nhập mật khẩu hiện tại">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Mật khẩu mới</label>
+                                        <input type="password" id="new-password" placeholder="Nhập mật khẩu mới">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Xác nhận mật khẩu</label>
+                                        <input type="password" id="confirm-password"
+                                            placeholder="Xác nhận mật khẩu mới">
+                                    </div>
+                                </div>
+
+                                <h4 style="margin-top: 2rem;">Thông báo</h4>
+                                <div class="notification-group">
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>Thông báo đơn hàng</h4>
+                                            <p>Nhận thông báo khi có đơn hàng mới hoặc cập nhật</p>
+                                        </div>
+                                        <label class="switch">
+                                            <input type="checkbox" id="notify-orders" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>Khuyến mãi</h4>
+                                            <p>Nhận thông tin về các chương trình khuyến mãi</p>
+                                        </div>
+                                        <label class="switch">
+                                            <input type="checkbox" id="notify-promos">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="save-btn">Lưu thay đổi</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Bookings Section -->
+        <div id="mybookings-section" class="section" style="display: none;">
+            <h2 class="section-title">Đơn đặt dịch vụ của tôi</h2>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterBookings('all')">Tất cả</button>
+                <button class="filter-tab" onclick="filterBookings('pending')">Chờ xác nhận</button>
+                <button class="filter-tab" onclick="filterBookings('confirmed')">Đã xác nhận</button>
+                <button class="filter-tab" onclick="filterBookings('completed')">Hoàn thành</button>
+                <button class="filter-tab" onclick="filterBookings('cancelled')">Đã hủy</button>
+            </div>
+
+            <div id="bookings-list" class="booking-list">
+                <!-- Bookings will be loaded dynamically -->
+                <div class="booking-item pending">
+                    <div class="booking-header">
+                        <h4><i>🔧</i> Sửa thiết bị gia dụng</h4>
+                        <span class="booking-id">Mã đơn: BK214</span>
+                    </div>
+                    <div class="booking-body">
+                        <div>
+                            <p><i>📅</i> <strong>Ngày giờ:</strong> 12/3/2026 - 08:00</p>
+                            <p><i>📍</i> <strong>Địa chỉ:</strong> Hà Nội</p>
+                        </div>
+                        <div>
+                            <p><i>💰</i> <strong>Tổng tiền:</strong> 260.000 ₫</p>
+                            <p><i>💳</i> <strong>Thanh toán:</strong> <span class="status-badge status-pending">Chưa
+                                    thanh toán</span></p>
+                        </div>
+                    </div>
+                    <div class="booking-footer">
+                        <button class="btn-book" onclick="viewBookingDetail('BK214')"><i>👁️</i> Xem chi tiết</button>
+                        <button class="btn-pay" onclick="showPaymentModal('BK214')"><i>💳</i> Thanh toán ngay</button>
+                        <button class="btn-cancel" onclick="cancelBooking('BK214')"><i>❌</i> Hủy đơn</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Payments Section -->
+        <div id="mypayments-section" class="section" style="display: none;">
+            <h2 class="section-title">Lịch sử thanh toán</h2>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterPayments('all')">Tất cả</button>
+                <button class="filter-tab" onclick="filterPayments('paid')">Đã thanh toán</button>
+                <button class="filter-tab" onclick="filterPayments('unpaid')">Chưa thanh toán</button>
+            </div>
+
+            <div id="payments-list" class="booking-list">
+                <!-- Payments will be loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- Saved Services Section -->
+        <div id="saved-section" class="section" style="display: none;">
+            <h2 class="section-title">Đơn dịch vụ đã lưu</h2>
+
+            <div style="display: flex; justify-content: flex-end; margin-bottom: 2rem;">
+                <button class="btn-book" onclick="showSaveBookingModal()">➕ Lưu đơn dịch vụ mới</button>
+            </div>
+
+            <div id="saved-services-list" class="booking-list">
+                <!-- Saved services will be loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- Admin Services Management Section -->
+        <div id="admin-services-section" class="section" style="display: none;">
+            <div class="admin-container">
+                <div class="admin-header">
+                    <h2><i>🔧</i> Quản lý dịch vụ</h2>
+                    <div class="admin-actions">
+                        <button class="btn-primary" onclick="showAddServiceModal()">
+                            <i>➕</i> Thêm dịch vụ mới
+                        </button>
+                        <button class="btn-secondary" onclick="exportServices()">
+                            <i>📥</i> Xuất Excel
+                        </button>
+                        <button class="btn-secondary" onclick="document.getElementById('import-file').click()">
+                            <i>📤</i> Nhập Excel
+                        </button>
+                        <input type="file" id="import-file" accept=".csv,.xlsx" style="display: none;"
+                            onchange="importServices(this)">
+                    </div>
+                </div>
+
+                <!-- Filters and Search -->
+                <div class="filters-bar">
+                    <div class="search-box">
+                        <i>🔍</i>
+                        <input type="text" id="service-search" placeholder="Tìm kiếm dịch vụ..."
+                            onkeyup="searchServices()">
+                    </div>
+                    <select id="category-filter" onchange="filterServices()">
+                        <option value="">Tất cả danh mục</option>
+                        <option value="cleaning">Dọn dẹp</option>
+                        <option value="repair">Sửa chữa</option>
+                        <option value="appliance">Điện máy</option>
+                        <option value="plumbing">Sửa ống nước</option>
+                    </select>
+                    <select id="status-filter" onchange="filterServices()">
+                        <option value="">Tất cả trạng thái</option>
+                        <option value="active">Đang hoạt động</option>
+                        <option value="inactive">Ngừng hoạt động</option>
+                    </select>
+                    <button class="btn-reset" onclick="resetFilters()">
+                        <i>⟲</i> Reset
+                    </button>
+                </div>
+
+                <!-- Bulk Actions -->
+                <div class="bulk-actions">
+                    <div class="bulk-select">
+                        <input type="checkbox" id="select-all" onchange="toggleSelectAll()">
+                        <label for="select-all">Chọn tất cả</label>
+                    </div>
+                    <div class="bulk-buttons">
+                        <button class="btn-bulk" onclick="bulkDeleteServices()" style="background: #dc3545;">
+                            <i>🗑️</i> Xóa đã chọn
+                        </button>
+                        <button class="btn-bulk" onclick="bulkUpdateStatus('active')">
+                            <i>✅</i> Kích hoạt
+                        </button>
+                        <button class="btn-bulk" onclick="bulkUpdateStatus('inactive')">
+                            <i>⛔</i> Vô hiệu
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Services Table -->
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th width="40">
+                                    <input type="checkbox" id="select-all-header" onchange="toggleSelectAll()">
+                                </th>
+                                <th>ID</th>
+                                <th>Hình ảnh</th>
+                                <th>Tên dịch vụ</th>
+                                <th>Danh mục</th>
+                                <th>Giá</th>
+                                <th>Thời lượng</th>
+                                <th>Trạng thái</th>
+                                <th>Lượt đặt</th>
+                                <th>Ngày tạo</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="services-table-body">
+                            <!-- Data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <div class="pagination-info">
+                        Hiển thị <span id="showing-start">1</span>-<span id="showing-end">10</span> của <span
+                            id="total-items">0</span> dịch vụ
+                    </div>
+                    <div class="pagination-controls" id="pagination-controls">
+                        <button onclick="changePage('prev')" disabled>❮</button>
+                        <button class="active">1</button>
+                        <button onclick="changePage(2)">2</button>
+                        <button onclick="changePage(3)">3</button>
+                        <button onclick="changePage('next')">❯</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add/Edit Service Modal -->
+        <div id="service-modal" class="modal">
+            <div class="modal-content" style="max-width: 700px;">
+                <div class="modal-header">
+                    <h2 id="service-modal-title"><i>➕</i> Thêm dịch vụ mới</h2>
+                    <span class="close-modal" onclick="closeServiceModal()">&times;</span>
+                </div>
+
+                <form id="service-form" onsubmit="saveService(event)">
+                    <input type="hidden" id="service-id">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tên dịch vụ <span class="required">*</span></label>
+                            <input type="text" id="service-name" required placeholder="VD: Dọn dẹp nhà cửa">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Danh mục <span class="required">*</span></label>
+                            <select id="service-category" required>
+                                <option value="">Chọn danh mục</option>
+                                <option value="cleaning">Dọn dẹp</option>
+                                <option value="repair">Sửa chữa</option>
+                                <option value="appliance">Điện máy</option>
+                                <option value="plumbing">Sửa ống nước</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Giá <span class="required">*</span></label>
+                            <div class="price-input">
+                                <input type="number" id="service-price" required min="0" step="1000"
+                                    placeholder="250000">
+                                <span class="currency">VNĐ</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Thời lượng <span class="required">*</span></label>
+                            <div class="duration-input">
+                                <input type="number" id="service-duration" required min="1" placeholder="60">
+                                <select id="service-duration-unit">
+                                    <option value="minutes">Phút</option>
+                                    <option value="hours">Giờ</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mô tả</label>
+                        <textarea id="service-description" rows="3"
+                            placeholder="Mô tả chi tiết về dịch vụ..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hình ảnh</label>
+                        <div class="image-upload-container">
+                            <div class="image-preview" id="service-image-preview">
+                                <img src="" alt="Preview" style="display: none;">
+                                <span class="preview-placeholder">📷</span>
+                            </div>
+                            <input type="file" id="service-image" accept="image/*" onchange="previewServiceImage(this)">
+                            <button type="button" class="btn-upload"
+                                onclick="document.getElementById('service-image').click()">
+                                Chọn hình ảnh
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tính năng</label>
+                        <div id="features-container">
+                            <div class="feature-item">
+                                <input type="text" class="feature-input" placeholder="Tính năng 1">
+                                <button type="button" class="btn-remove-feature"
+                                    onclick="removeFeature(this)">✖</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add-feature" onclick="addFeature()">
+                            <i>➕</i> Thêm tính năng
+                        </button>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Trạng thái</label>
+                            <label class="switch">
+                                <input type="checkbox" id="service-status" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="closeServiceModal()">Hủy</button>
+                        <button type="submit" class="btn-save">Lưu dịch vụ</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- View Service Modal -->
+        <div id="view-service-modal" class="modal">
+            <div class="modal-content" style="max-width: 600px;">
+                <div class="modal-header">
+                    <h2><i>👁️</i> Chi tiết dịch vụ</h2>
+                    <span class="close-modal" onclick="closeModal('view-service-modal')">&times;</span>
+                </div>
+
+                <div class="service-detail">
+                    <div class="service-detail-header">
+                        <div class="service-detail-image" id="view-service-image">
+                            <img src="" alt="Service Image" style="display: none;">
+                            <span class="image-placeholder">📷</span>
+                        </div>
+                        <div class="service-detail-title">
+                            <h3 id="view-service-name"></h3>
+                            <span class="service-category-badge" id="view-service-category"></span>
+                            <span class="service-status-badge" id="view-service-status"></span>
+                        </div>
+                    </div>
+
+                    <div class="service-detail-info">
+                        <div class="info-row">
+                            <span class="info-label">Giá:</span>
+                            <span class="info-value" id="view-service-price"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Thời lượng:</span>
+                            <span class="info-value" id="view-service-duration"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Mô tả:</span>
+                            <span class="info-value" id="view-service-description"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Tính năng:</span>
+                            <div class="info-value" id="view-service-features"></div>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Ngày tạo:</span>
+                            <span class="info-value" id="view-service-created"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Lượt đặt:</span>
+                            <span class="info-value" id="view-service-bookings"></span>
+                        </div>
+                    </div>
+
+                    <div class="service-detail-actions">
+                        <button class="btn-edit" onclick="editServiceFromView()">
+                            <i>✏️</i> Chỉnh sửa
+                        </button>
+                        <button class="btn-delete" onclick="deleteServiceFromView()">
+                            <i>🗑️</i> Xóa
+                        </button>
+                        <button class="btn-close" onclick="closeModal('view-service-modal')">
+                            Đóng
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Confirmation Modal -->
+        <div id="delete-modal" class="modal">
+            <div class="modal-content" style="max-width: 400px; text-align: center;">
+                <div class="modal-header" style="background: #dc3545;">
+                    <h2><i>⚠️</i> Xác nhận xóa</h2>
+                    <span class="close-modal" onclick="closeModal('delete-modal')">&times;</span>
+                </div>
+
+                <div style="padding: 2rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem; color: #dc3545;">🗑️</div>
+                    <h3 style="margin-bottom: 1rem; color: #333;">Bạn có chắc chắn muốn xóa?</h3>
+                    <p style="color: #666; margin-bottom: 1.5rem;" id="delete-message">Dịch vụ này sẽ bị xóa vĩnh viễn!
+                    </p>
+
+                    <input type="hidden" id="delete-service-id">
+
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <button class="btn-cancel" onclick="closeModal('delete-modal')">Hủy</button>
+                        <button class="btn-delete" onclick="confirmDeleteService()">Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content" style="max-width: 450px; padding: 0; overflow: hidden; margin: 0;">
+            <div class="auth-card" style="box-shadow: none; width: 100%; max-width: 100%; margin: 0; max-height: 90vh;">
+                <div class="auth-header" style="padding: 25px 25px 20px;">
+                    <h2 style="font-size: 24px; margin-bottom: 5px;">Chào mừng trở lại! 👋</h2>
+                    <p style="font-size: 14px;">Đăng nhập để đặt dịch vụ và quản lý đơn hàng</p>
+                </div>
+                <div class="auth-body" style="padding: 20px 25px 25px;">
+                    <div class="auth-tabs" style="margin-bottom: 20px; gap: 5px;">
+                        <div class="auth-tab active" style="padding: 10px; font-size: 15px;"
+                            onclick="switchAuthTab('login')">Đăng nhập</div>
+                        <div class="auth-tab" style="padding: 10px; font-size: 15px;"
+                            onclick="switchAuthTab('register')">Đăng ký</div>
+                    </div>
+
+                    <form class="auth-form" onsubmit="handleLogin(event)">
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="font-size: 13px; margin-bottom: 4px;"> Email hoặc Số điện thoại</label>
+                            <input type="text" id="username" placeholder="Nhập email hoặc số điện thoại" required
+                                style="padding: 10px 35px 10px 12px; font-size: 14px;">
+                            <i class="input-icon" style="top: 32px; right: 12px; font-size: 16px;">📧</i>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="font-size: 13px; margin-bottom: 4px;">Mật khẩu</label>
+                            <input type="password" id="password" placeholder="••••••••" required
+                                style="padding: 10px 35px 10px 12px; font-size: 14px;">
+                            <i class="input-icon" style="top: 32px; right: 12px; font-size: 16px; cursor: pointer;"
+                                onclick="togglePasswordVisibility('password')">👁️</i>
+                        </div>
+
+                        <div class="checkbox-group" style="margin: 10px 0 15px; gap: 5px;">
+                            <input type="checkbox" id="remember" style="width: 16px; height: 16px;">
+                            <label for="remember" style="font-size: 13px;">Ghi nhớ đăng nhập</label>
+                            <a href="#" onclick="showForgotPasswordModal(); return false;"
+                                style="font-size: 13px; margin-left: auto; color: #667eea; text-decoration: none; font-weight: 500;">Quên
+                                mật khẩu?</a>
+                        </div>
+
+                        <button type="submit" class="auth-btn" id="login-btn"
+                            style="padding: 12px; font-size: 15px; margin-bottom: 15px;">
+                            <span>Đăng nhập</span>
+                        </button>
+                    </form>
+
+                    <div class="auth-divider" style="margin: 15px 0; font-size: 13px;">
+                        <span>Hoặc đăng nhập với</span>
+                    </div>
+
+                    <div class="social-login" style="gap: 8px; margin-bottom: 15px;">
+                        <button class="social-btn google" style="padding: 10px; font-size: 13px;">
+                            <i style="font-size: 16px;">G</i>
+                            <span>Google</span>
+                        </button>
+                        <button class="social-btn facebook" style="padding: 10px; font-size: 13px;">
+                            <i style="font-size: 16px;">F</i>
+                            <span>Facebook</span>
+                        </button>
+                        <button class="social-btn" style="padding: 10px; font-size: 13px;">
+                            <i style="font-size: 16px;">📱</i>
+                            <span>SMS</span>
+                        </button>
+                    </div>
+
+                    <div class="auth-footer" style="font-size: 13px; margin-top: 5px;">
+                        Chưa có tài khoản?
+                        <a href="#" onclick="showRegisterModal(); return false;">Đăng ký ngay</a>
+                    </div>
+                </div>
+            </div>
+            <span class="close-modal" onclick="closeModal('login-modal')"
+                style="position: absolute; top: 10px; right: 15px; color: white; z-index: 1; font-size: 28px; cursor: pointer;">&times;</span>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content" style="max-width: 450px; padding: 0; overflow: hidden; margin: 0;">
+            <div class="auth-card"
+                style="box-shadow: none; width: 100%; max-width: 100%; margin: 0; max-height: 85vh; display: flex; flex-direction: column;">
+                <div class="auth-header" style="padding: 20px 25px 15px; flex-shrink: 0;">
+                    <h2 style="font-size: 24px; margin-bottom: 5px;">Tạo tài khoản mới! 🎉</h2>
+                    <p style="font-size: 14px;">Đăng ký để trải nghiệm dịch vụ tuyệt vời</p>
+                </div>
+                <div class="auth-body"
+                    style="padding: 15px 25px 20px; overflow-y: auto; flex: 1; max-height: calc(85vh - 120px);">
+                    <div class="auth-tabs" style="margin-bottom: 15px; gap: 5px;">
+                        <div class="auth-tab" style="padding: 8px; font-size: 15px;" onclick="switchAuthTab('login')">
+                            Đăng nhập</div>
+                        <div class="auth-tab active" style="padding: 8px; font-size: 15px;"
+                            onclick="switchAuthTab('register')">Đăng ký</div>
+                    </div>
+
+                    <form class="auth-form" onsubmit="handleRegister(event)">
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <label style="font-size: 13px; margin-bottom: 4px; font-weight: 500;">Tên đăng nhập</label>
+                            <input type="text" id="reg-name" placeholder="Nhập tên đăng nhập" required
+                                style="padding: 10px 35px 10px 12px; font-size: 14px; border-radius: 8px;">
+                            <i class="input-icon"
+                                style="position: absolute; right: 12px; top: 32px; font-size: 16px; color: #999;">👤</i>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <label style="font-size: 13px; margin-bottom: 4px; font-weight: 500;">Email</label>
+                            <input type="email" id="reg-email" placeholder="Nhập email" required
+                                style="padding: 10px 35px 10px 12px; font-size: 14px; border-radius: 8px;">
+                            <i class="input-icon"
+                                style="position: absolute; right: 12px; top: 32px; font-size: 16px; color: #999;">📧</i>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <label style="font-size: 13px; margin-bottom: 4px; font-weight: 500;">Số điện thoại</label>
+                            <input type="tel" id="reg-phone" placeholder="Nhập số điện thoại" required
+                                style="padding: 10px 35px 10px 12px; font-size: 14px; border-radius: 8px;">
+                            <i class="input-icon"
+                                style="position: absolute; right: 12px; top: 32px; font-size: 16px; color: #999;">📱</i>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <label style="font-size: 13px; margin-bottom: 4px; font-weight: 500;">Mật khẩu</label>
+                            <input type="password" id="reg-password" placeholder="••••••••" required
+                                onkeyup="checkPasswordStrength(this.value)"
+                                style="padding: 10px 35px 10px 12px; font-size: 14px; border-radius: 8px;">
+                            <i class="input-icon"
+                                style="position: absolute; right: 12px; top: 32px; font-size: 16px; color: #999; cursor: pointer;"
+                                onclick="togglePasswordVisibility('reg-password')">👁️</i>
+                            <div class="password-strength" style="margin-top: 5px; height: 3px;">
+                                <div class="password-strength-bar" id="password-strength-bar"></div>
+                            </div>
+                            <span class="password-hint"
+                                style="font-size: 11px; color: #666; margin-top: 3px; line-height: 1.3; display: block;">Mật
+                                khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số</span>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <label style="font-size: 13px; margin-bottom: 4px; font-weight: 500;">Xác nhận mật
+                                khẩu</label>
+                            <input type="password" id="reg-confirm-password" placeholder="••••••••" required
+                                style="padding: 10px 35px 10px 12px; font-size: 14px; border-radius: 8px;">
+                            <i class="input-icon"
+                                style="position: absolute; right: 12px; top: 32px; font-size: 16px; color: #999; cursor: pointer;"
+                                onclick="togglePasswordVisibility('reg-confirm-password')">👁️</i>
+                        </div>
+
+                        <div class="checkbox-group"
+                            style="display: flex; align-items: flex-start; gap: 8px; margin: 10px 0 15px;">
+                            <input type="checkbox" id="terms" required
+                                style="width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0;">
+                            <label for="terms" style="font-size: 13px; line-height: 1.4; color: #333;">Tôi đồng ý với <a
+                                    href="#" style="color: #667eea; text-decoration: none; font-weight: 500;">điều khoản
+                                    sử dụng</a> và <a href="#"
+                                    style="color: #667eea; text-decoration: none; font-weight: 500;">chính sách bảo
+                                    mật</a></label>
+                        </div>
+
+                        <button type="submit" class="auth-btn" id="register-btn"
+                            style="width: 100%; padding: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 15px; transition: all 0.3s;">
+                            <span>Đăng ký</span>
+                        </button>
+                    </form>
+
+                    <div class="auth-divider"
+                        style="display: flex; align-items: center; text-align: center; margin: 15px 0; color: #999; font-size: 13px;">
+                        <span style="flex: 1; border-bottom: 1px solid #e0e0e0;"></span>
+                        <span style="padding: 0 10px;">Hoặc đăng ký với</span>
+                        <span style="flex: 1; border-bottom: 1px solid #e0e0e0;"></span>
+                    </div>
+
+                    <div class="social-login"
+                        style="display: flex; justify-content: center; gap: 12px; margin: 15px 0 15px;">
+                        <button class="social-btn google"
+                            style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 20px; border: 1px solid #e0e0e0; border-radius: 8px; background: white; color: #333; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; min-width: 120px;">
+                            <i style="font-size: 18px; color: #DB4437;">G</i>
+                            <span>Google</span>
+                        </button>
+                        <button class="social-btn facebook"
+                            style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 20px; border: 1px solid #e0e0e0; border-radius: 8px; background: white; color: #333; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; min-width: 120px;">
+                            <i style="font-size: 18px; color: #4267B2;">F</i>
+                            <span>Facebook</span>
+                        </button>
+                    </div>
+
+                    <div class="auth-footer"
+                        style="text-align: center; color: #666; font-size: 13px; margin-top: 10px; padding-top: 5px;">
+                        Đã có tài khoản?
+                        <a href="#" onclick="showLoginModal(); return false;"
+                            style="color: #667eea; text-decoration: none; font-weight: 600; margin-left: 3px;">Đăng
+                            nhập</a>
+                    </div>
+                </div>
+            </div>
+            <span class="close-modal" onclick="closeModal('register-modal')"
+                style="position: absolute; top: 10px; right: 15px; color: white; z-index: 10; font-size: 28px; cursor: pointer; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 50%;">&times;</span>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-modal" class="modal">
+        <div class="modal-content" style="max-width: 450px; padding: 0; overflow: hidden; margin: 0;">
+            <div class="auth-card" style="box-shadow: none; width: 100%; max-width: 100%; margin: 0; max-height: 90vh;">
+                <div class="auth-header"
+                    style="padding: 25px 25px 20px; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);">
+                    <h2 style="font-size: 24px; margin-bottom: 5px;">Quên mật khẩu? 🔐</h2>
+                    <p style="font-size: 14px;">Nhập email để nhận hướng dẫn đặt lại mật khẩu</p>
+                </div>
+                <div class="auth-body" style="padding: 25px;">
+                    <form class="auth-form" onsubmit="handleForgotPassword(event)">
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label style="font-size: 13px; margin-bottom: 4px; font-weight: 500;">Email đăng ký</label>
+                            <input type="email" id="forgot-email" placeholder="Nhập email của bạn" required
+                                style="padding: 12px 35px 12px 12px; font-size: 14px; border-radius: 8px;">
+                            <i class="input-icon"
+                                style="position: absolute; right: 12px; top: 35px; font-size: 18px; color: #999;">📧</i>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <div
+                                style="background: #f0f3ff; padding: 15px; border-radius: 10px; margin: 15px 0; border-left: 3px solid #667eea;">
+                                <p style="font-size: 13px; color: #666; line-height: 1.5; margin: 0;">
+                                    <i style="color: #667eea; margin-right: 5px;">ℹ️</i>
+                                    Chúng tôi sẽ gửi link đặt lại mật khẩu vào email của bạn. Vui lòng kiểm tra hộp thư
+                                    đến (hoặc thư rác).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 10px; margin-top: 20px;">
+                            <button type="button" onclick="closeModal('forgot-password-modal'); showLoginModal();"
+                                style="flex: 1; padding: 12px; background: #6c757d; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                                Quay lại
+                            </button>
+                            <button type="submit" class="auth-btn"
+                                style="flex: 2; padding: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin-bottom: 0;">
+                                <span>Gửi yêu cầu</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="auth-footer"
+                        style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e0e0e0;">
+                        <p style="font-size: 13px; color: #666;">
+                            Nhớ mật khẩu?
+                            <a href="#" onclick="closeModal('forgot-password-modal'); showLoginModal(); return false;"
+                                style="color: #667eea; text-decoration: none; font-weight: 600;">Đăng nhập</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <span class="close-modal" onclick="closeModal('forgot-password-modal')"
+                style="position: absolute; top: 10px; right: 15px; color: white; z-index: 10; font-size: 28px; cursor: pointer; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 50%;">&times;</span>
+        </div>
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div id="reset-password-modal" class="modal">
+        <div class="modal-content" style="max-width: 450px; padding: 0; overflow: hidden; margin: 0;">
+            <div class="auth-card" style="box-shadow: none; width: 100%; max-width: 100%; margin: 0; max-height: 90vh;">
+                <div class="auth-header"
+                    style="padding: 25px 25px 20px; background: linear-gradient(135deg, #4834d4 0%, #686de0 100%);">
+                    <h2 style="font-size: 24px; margin-bottom: 5px;">Đặt lại mật khẩu 🔒</h2>
+                    <p style="font-size: 14px;">Tạo mật khẩu mới cho tài khoản của bạn</p>
+                </div>
+                <div class="auth-body" style="padding: 25px;">
+                    <form class="auth-form" onsubmit="handleResetPassword(event)">
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="font-size: 13px; margin-bottom: 4px; font-weight: 500;">Mật khẩu mới</label>
+                            <input type="password" id="reset-password" placeholder="••••••••" required
+                                onkeyup="checkResetPasswordStrength(this.value)"
+                                style="padding: 12px 35px 12px 12px; font-size: 14px; border-radius: 8px;">
+                            <i class="input-icon"
+                                style="position: absolute; right: 12px; top: 35px; font-size: 18px; color: #999; cursor: pointer;"
+                                onclick="togglePasswordVisibility('reset-password')">👁️</i>
+                            <div class="password-strength" style="margin-top: 8px; height: 4px;">
+                                <div class="password-strength-bar" id="reset-password-strength-bar"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="font-size: 13px; margin-bottom: 4px; font-weight: 500;">Xác nhận mật khẩu
+                                mới</label>
+                            <input type="password" id="reset-confirm-password" placeholder="••••••••" required
+                                style="padding: 12px 35px 12px 12px; font-size: 14px; border-radius: 8px;">
+                            <i class="input-icon"
+                                style="position: absolute; right: 12px; top: 35px; font-size: 18px; color: #999; cursor: pointer;"
+                                onclick="togglePasswordVisibility('reset-confirm-password')">👁️</i>
+                        </div>
+
+                        <div class="password-hint"
+                            style="font-size: 12px; color: #666; margin: 10px 0 20px; line-height: 1.4; background: #f8f9fa; padding: 10px; border-radius: 8px;">
+                            <i style="color: #667eea;">📌</i> Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ
+                            thường, số và ký tự đặc biệt
+                        </div>
+
+                        <div style="display: flex; gap: 10px;">
+                            <button type="button"
+                                onclick="closeModal('reset-password-modal'); showForgotPasswordModal();"
+                                style="flex: 1; padding: 12px; background: #6c757d; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;">
+                                Quay lại
+                            </button>
+                            <button type="submit" class="auth-btn"
+                                style="flex: 2; padding: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin-bottom: 0;">
+                                <span>Cập nhật mật khẩu</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <span class="close-modal" onclick="closeModal('reset-password-modal')"
+                style="position: absolute; top: 10px; right: 15px; color: white; z-index: 10; font-size: 28px; cursor: pointer; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 50%;">&times;</span>
+        </div>
+    </div>
+
+    <!-- Success Modal (for password reset confirmation) -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content" style="max-width: 400px; text-align: center;">
+            <div style="font-size: 4rem; margin-bottom: 1rem; color: #28a745;">✅</div>
+            <h3 style="color: #333; margin-bottom: 1rem; font-size: 1.5rem;">Thành công!</h3>
+            <p id="success-message" style="color: #666; margin-bottom: 1.5rem; line-height: 1.5;">Yêu cầu đặt lại mật
+                khẩu đã được gửi. Vui lòng kiểm tra email của bạn.</p>
+            <button class="auth-btn" onclick="closeModal('success-modal'); showLoginModal();"
+                style="padding: 12px 30px; width: auto; display: inline-block;">Đóng</button>
+            <span class="close-modal" onclick="closeModal('success-modal')"
+                style="position: absolute; top: 10px; right: 15px; font-size: 24px;">&times;</span>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content" style="max-width: 650px; padding: 0; overflow: hidden; border-radius: 20px;">
+            <div class="modal-header"
+                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px 25px; color: white; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="font-size: 24px; display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 28px;">📝</span> Đặt dịch vụ
+                </h2>
+                <span class="close-modal" onclick="closeModal('booking-modal')"
+                    style="font-size: 32px; cursor: pointer; color: white; opacity: 0.8;">&times;</span>
+            </div>
+
+            <div style="padding: 25px; max-height: 70vh; overflow-y: auto;">
+                <form class="booking-form" onsubmit="handleBooking(event)">
+                    <div
+                        style="background: #f0f3ff; padding: 15px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #667eea;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                            <span style="font-weight: 600; color: #667eea;">🔹 Dịch vụ đã chọn:</span>
+                            <span style="font-weight: bold; color: #333; font-size: 16px;" id="booking-service">Giặt
+                                sofa / thảm</span>
+                        </div>
+                        <input type="hidden" id="booking-service-hidden" value="Giặt sofa / thảm">
+                        <input type="hidden" id="booking-price-hidden" value="350000">
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                        <div class="form-group" style="margin: 0;">
+                            <label
+                                style="display: block; margin-bottom: 6px; color: #333; font-weight: 500; font-size: 14px;">
+                                <span style="margin-right: 5px;">📅</span> Ngày thực hiện
+                            </label>
+                            <input type="date" id="booking-date" required min=""
+                                style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px;">
+                        </div>
+                        <div class="form-group" style="margin: 0;">
+                            <label
+                                style="display: block; margin-bottom: 6px; color: #333; font-weight: 500; font-size: 14px;">
+                                <span style="margin-right: 5px;">⏰</span> Giờ thực hiện
+                            </label>
+                            <input type="time" id="booking-time" required
+                                style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px;"
+                                step="1800" min="07:00" max="22:00" value="08:00">
+                            <small style="display: block; margin-top: 5px; color: #999; font-size: 12px;">⏱️ Chọn giờ
+                                linh hoạt từ 7:00 - 22:00</small>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px; margin-bottom: 20px;">
+                        <div class="form-group" style="margin: 0;">
+                            <label
+                                style="display: block; margin-bottom: 6px; color: #333; font-weight: 500; font-size: 14px;">
+                                <span style="margin-right: 5px;">📍</span> Địa chỉ
+                            </label>
+                            <input type="text" id="booking-address"
+                                placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành phố" required
+                                style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px;">
+                        </div>
+                        <div class="form-group" style="margin: 0;">
+                            <label
+                                style="display: block; margin-bottom: 6px; color: #333; font-weight: 500; font-size: 14px;">
+                                <span style="margin-right: 5px;">📱</span> Số điện thoại
+                            </label>
+                            <input type="tel" id="booking-phone" placeholder="0123456789" required
+                                style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px;">
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                        <div class="form-group" style="margin: 0;">
+                            <label
+                                style="display: block; margin-bottom: 6px; color: #333; font-weight: 500; font-size: 14px;">
+                                <span style="margin-right: 5px;">👥</span> Số nhân viên
+                            </label>
+                            <select id="booking-staff"
+                                style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; background: white;">
+                                <option value="1">1 nhân viên</option>
+                                <option value="2">2 nhân viên (+50.000đ)</option>
+                                <option value="3">3 nhân viên (+100.000đ)</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin: 0;">
+                            <label
+                                style="display: block; margin-bottom: 6px; color: #333; font-weight: 500; font-size: 14px;">
+                                <span style="margin-right: 5px;">📝</span> Yêu cầu đặc biệt
+                            </label>
+                            <input type="text" id="booking-notes" placeholder="Ghi chú thêm..."
+                                style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px;">
+                        </div>
+                    </div>
+
+                    <div
+                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 20px; margin: 25px 0 20px; color: white; box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);">
+                        <h3
+                            style="margin: 0 0 15px 0; font-size: 18px; display: flex; align-items: center; gap: 8px; color: white;">
+                            <span style="font-size: 22px;">🧾</span> Chi tiết thanh toán
+                        </h3>
+
+                        <div style="background: rgba(255,255,255,0.1); border-radius: 12px; padding: 15px;">
+                            <div
+                                style="display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed rgba(255,255,255,0.2);">
+                                <span>💎 Giá dịch vụ cơ bản:</span>
+                                <span style="font-weight: 600;" id="service-price">350.000 ₫</span>
+                            </div>
+                            <div
+                                style="display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed rgba(255,255,255,0.2);">
+                                <span>🛠️ Phí dịch vụ:</span>
+                                <span style="font-weight: 600;">10.000 ₫</span>
+                            </div>
+                            <div
+                                style="display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed rgba(255,255,255,0.2);">
+                                <span>👥 Phí thêm nhân viên:</span>
+                                <span style="font-weight: 600;" id="extra-staff-fee">0 ₫</span>
+                            </div>
+                            <div
+                                style="display: flex; justify-content: space-between; margin-top: 15px; padding-top: 10px; border-top: 2px solid rgba(255,215,0,0.3);">
+                                <span style="font-size: 18px; font-weight: bold; color: #ffd700;">💰 Tổng cộng:</span>
+                                <span style="font-size: 22px; font-weight: bold; color: #ffd700;"
+                                    id="total-price">360.000 ₫</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 15px; margin-top: 25px;">
+                        <button type="button" onclick="saveBookingDraft()"
+                            style="flex: 1; padding: 14px; background: #6c757d; color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span>💾</span> Lưu nháp
+                        </button>
+                        <button type="submit"
+                            style="flex: 2; padding: 14px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span>✅</span> Đặt dịch vụ
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Detail Modal -->
+    <div id="booking-detail-modal" class="modal">
+        <div class="modal-content" style="max-width: 550px;">
+            <div class="modal-header">
+                <h2>📋 Chi tiết đơn hàng</h2>
+                <span class="close-modal" onclick="closeModal('booking-detail-modal')">&times;</span>
+            </div>
+            <div id="booking-detail-content">
+                <!-- Booking details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Save Booking Modal -->
+    <div id="save-booking-modal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>💾 Lưu đơn dịch vụ</h2>
+                <span class="close-modal" onclick="closeModal('save-booking-modal')">&times;</span>
+            </div>
+
+            <form onsubmit="handleSaveBooking(event)">
+                <div class="form-group">
+                    <label>Tên dịch vụ</label>
+                    <input type="text" id="save-service-name" required placeholder="VD: Dọn dẹp hàng tuần">
+                </div>
+
+                <div class="form-group">
+                    <label>Mô tả</label>
+                    <textarea id="save-service-desc" rows="3" placeholder="Mô tả chi tiết dịch vụ..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Giá dự kiến</label>
+                    <input type="number" id="save-service-price" required placeholder="250000">
+                </div>
+
+                <div class="form-group">
+                    <label>Đơn vị</label>
+                    <select id="save-service-unit">
+                        <option value="giờ">giờ</option>
+                        <option value="lần">lần</option>
+                        <option value="bộ">bộ</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Ghi chú</label>
+                    <textarea id="save-service-notes" rows="2" placeholder="Ghi chú thêm..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-book" style="width: 100%; margin-top: 1rem;">Lưu dịch vụ</button>
+            </form>
+        </div>
+    </div>
+
+   <!-- Payment Modal - THÊM STYLE TRỰC TIẾP ĐỂ CHẮC CHẮN -->
+<div id="payment-modal" class="modal" style="overflow-y: auto !important; display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; padding: 20px;">
+    <div class="modal-content" style="max-width: 600px; margin: 30px auto; background: white; border-radius: 24px; position: relative; max-height: none !important; overflow: visible !important;">
+        <!-- Header -->
+        <div class="payment-header" style="background: linear-gradient(135deg, #1a2a4a, #2a3a5a); padding: 1.5rem; color: white; border-radius: 24px 24px 0 0;">
+            <h2 style="margin:0; font-size:1.8rem;">💳 Thanh toán đơn hàng</h2>
+            <p style="margin:5px 0 0; opacity:0.9;">Vui lòng kiểm tra thông tin</p>
+            <span class="close-modal" onclick="document.getElementById('payment-modal').style.display='none'" style="position:absolute; top:1rem; right:1.5rem; color:white; font-size:2rem; cursor:pointer;">&times;</span>
+        </div>
+
+        <!-- Thông tin đơn hàng -->
+        <div style="padding:1.5rem;">
+            <div id="payment-booking-info" style="background:#f8faff; border-radius:16px; padding:1.2rem;">
+                <!-- JS load ở đây -->
+            </div>
+        </div>
+
+        <!-- Phương thức thanh toán -->
+        <div style="padding:0 1.5rem;">
+            <h3 style="margin:0 0 1rem;">💳 Chọn phương thức</h3>
+            <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+                <div class="payment-method-card selected" onclick="selectPaymentMethod('cash', this)" style="background:white; border:2px solid #667eea; border-radius:12px; padding:0.8rem; text-align:center; cursor:pointer;">
+                    <div style="font-size:1.8rem;">💵</div>
+                    <div style="font-weight:600;">Tiền mặt</div>
+                </div>
+                <div class="payment-method-card" onclick="selectPaymentMethod('card', this)" style="background:white; border:2px solid #ddd; border-radius:12px; padding:0.8rem; text-align:center; cursor:pointer;">
+                    <div style="font-size:1.8rem;">💳</div>
+                    <div style="font-weight:600;">Thẻ</div>
+                </div>
+                <div class="payment-method-card" onclick="selectPaymentMethod('bank', this)" style="background:white; border:2px solid #ddd; border-radius:12px; padding:0.8rem; text-align:center; cursor:pointer;">
+                    <div style="font-size:1.8rem;">🏦</div>
+                    <div style="font-weight:600;">Chuyển khoản</div>
+                </div>
+                <div class="payment-method-card" onclick="selectPaymentMethod('momo', this)" style="background:white; border:2px solid #ddd; border-radius:12px; padding:0.8rem; text-align:center; cursor:pointer;">
+                    <div style="font-size:1.8rem;">📱</div>
+                    <div style="font-weight:600;">MoMo</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Details -->
+        <div id="card-details" style="display:none; padding:1rem 1.5rem;">
+            <div style="background:#f8faff; border-radius:16px; padding:1.2rem;">
+                <h4 style="margin:0 0 1rem;">💳 Thông tin thẻ</h4>
+                <input type="text" id="card-number" placeholder="Số thẻ" style="width:100%; padding:12px; margin-bottom:10px; border:2px solid #ddd; border-radius:12px;">
+                <div style="display:grid; grid-template-columns:2fr 1fr; gap:10px;">
+                    <input type="text" id="card-expiry" placeholder="MM/YY" style="padding:12px; border:2px solid #ddd; border-radius:12px;">
+                    <input type="text" id="card-cvv" placeholder="CVV" style="padding:12px; border:2px solid #ddd; border-radius:12px;">
+                </div>
+                <input type="text" id="card-name" placeholder="Tên chủ thẻ" style="width:100%; padding:12px; margin-top:10px; border:2px solid #ddd; border-radius:12px;">
+            </div>
+        </div>
+
+        <!-- Bank Details -->
+        <div id="bank-details" style="display:none; padding:1rem 1.5rem;">
+            <div style="background:#f8faff; border-radius:16px; padding:1.2rem;">
+                <h4 style="margin:0 0 1rem;">🏦 Chuyển khoản</h4>
+                <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #ddd;">
+                    <span>Ngân hàng:</span> <strong>Vietcombank</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #ddd;">
+                    <span>Số TK:</span> <strong>1234567890</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; padding:8px 0;">
+                    <span>Nội dung:</span> <strong id="bank-transfer-content">TT DON HANG</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- MoMo Details -->
+        <div id="momo-details" style="display:none; padding:1rem 1.5rem;">
+            <div style="background:#f8faff; border-radius:16px; padding:1.2rem; text-align:center;">
+                <h4 style="margin:0 0 1rem;">📱 Quét mã QR</h4>
+                <img src="IMG_0768.jpg" alt="QR" style="width:150px; height:150px; margin:0 auto; border-radius:12px; display:block;">
+                <p style="margin-top:10px;">Số ĐT: <strong>0901234567</strong></p>
+            </div>
+        </div>
+
+        <input type="hidden" id="payment-booking-id">
+
+        <!-- Nút -->
+        <div style="padding:1.5rem;">
+            <button onclick="processPayment()" style="width:100%; padding:15px; background:linear-gradient(135deg, #667eea, #764ba2); color:white; border:none; border-radius:40px; font-size:16px; font-weight:bold; cursor:pointer; margin-bottom:10px;">
+                ✅ Xác nhận thanh toán
+            </button>
+            <button onclick="document.getElementById('payment-modal').style.display='none'" style="width:100%; padding:12px; background:white; border:2px solid #ddd; border-radius:40px; cursor:pointer;">
+                ✖️ Đóng
+            </button>
+        </div>
+    </div>
+</div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
